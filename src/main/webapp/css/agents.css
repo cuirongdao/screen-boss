@@ -1,0 +1,110 @@
+@CHARSET "UTF-8";
+.font-large {
+    font-size:48px;
+}
+.font-medium {
+    font-size:32px;
+}
+.font-small {
+    font-size:24px;
+}
+.distance-long {
+    margin-top;
+    8px;
+    margin-bottom:8px;
+    padding-top:8px;
+    padding-bottom:8px;
+}
+.distance-medium {
+    margin-top;
+    4px;
+    margin-bottom:4px;
+    padding-top:4px;
+    padding-bottom:4px;
+}
+.distance-short {
+    margin-top;
+    2px;
+    margin-bottom:2px;
+    padding-top:2px;
+    padding-bottom:2px;
+}
+.odd-line {
+    background:#ffffff;
+}
+.even-line {
+    background:#80ffff;
+}
+.logoff-line {
+    color: #CCC;
+}
+* {
+    margin:0 auto;
+    padding:0;
+    font-family:"宋体";
+}
+html, body {
+    margin:0 auto;
+    padding:0;
+    background-color:#26456c;
+    color:white;
+    text-align:center;
+}
+.container {
+    padding:0;
+    width:100%;
+    min-width: 1280px;
+}
+.header {
+}
+.side-left {
+    float:left;
+    margin-left:12px;
+    width:242px;
+    height:100%;
+}
+.clock {
+    width:100%;
+    color:white;
+}
+.clock-text {
+    font-weight:normal;
+}
+.call-statistic {
+    margin-top:56px;
+    width:100%;
+    text-align:right;
+}
+.call-statistic-title {
+    margin: 8px 0 0 0;
+    font-weight:normal;
+}
+.call-statistic-value {
+    margin:0;
+    font-weight:bold;
+}
+.side-right {
+    height:auto;
+}
+table {
+    width:980px;
+    background-color:silver;
+}
+thead {
+    background-color:black;
+    color:white;
+}
+tbody {
+    background-color:white;
+    color:black;
+}
+th {
+    width:140px;
+    font-size:24px;
+}
+tr {
+    height:56px;
+}
+td {
+    font-weight:bold;
+}

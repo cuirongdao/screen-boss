@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error" monitorInterval="5">
+    <!--先定义所有的appender -->
+    <Appenders>
+        <!--这个输出控制台的配置 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+            <ThresholdFilter level="trace" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <!--这个都知道是输出日志的格式 -->
+            <PatternLayout
+                    pattern="%highlight{%d [%t] %-5level  %-5L %M - %msg%n%throwable}"/>
+            <!-- <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M
+                - %msg%xEx%n" /> -->
+        </Console>
+        <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，这个也挺有用的，适合临时测试用 -->
+        <RandomAccessFile name="TMP" fileName="log/tmp.log"
+                          immediateFlush="false" append="false">
+            <!-- <PatternLayout pattern="%d %-5level: %msg%n%throwable" /> -->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %L %M - %msg%xEx%n"/>
+        </RandomAccessFile>
+        <RandomAccessFile name="ERROR" fileName="logs/error.log"
+                          immediateFlush="false">
+            <ThresholdFilter level="error" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <PatternLayout pattern="%d %-5level %L %M - %msg%xEx%n"/>
+            <!-- <PatternLayout pattern="%d{yyyy.MM.dd 'at' HH:mm:ss z} %-5level %class{36}
+                %L %M - %msg%xEx%n" /> -->
+        </RandomAccessFile>
+        <!--这个会打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
+        <RollingRandomAccessFile name="RollingFile"
+                                 fileName="logs/app.log"
+                                 filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz"
+                                 immediateFlush="false" append="true">
+
+            <!-- <PatternLayout pattern="%d %-5level [%t|%M]: %msg%n%throwable" /> -->
+            <PatternLayout pattern="%d %-5level %L %M - %msg%xEx%n"/>
+            <!-- <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36}
+                %L %M - %msg%xEx%n" /> -->
+            <SizeBasedTriggeringPolicy size="50MB"/>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效 -->
+    <Loggers>
+        <!--建立一个默认的root的logger -->
+        <AsyncRoot level="trace">
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ERROR"/>
+            <AppenderRef ref="TMP"/>
+        </AsyncRoot>
+        <!-- <AsyncLogger name="cn.com.wilcom" level="trace" -->
+        <!-- includeLocation="false" additivity="false"> -->
+        <!-- <AppenderRef ref="RollingFile" /> -->
+        <!-- <AppenderRef ref="Console" /> -->
+        <!-- <AppenderRef ref="ERROR" /> -->
+        <!-- <AppenderRef ref="TMP" /> -->
+        <!-- </AsyncLogger> -->
+        <!-- <AsyncLogger name="org.springframework" level="error" -->
+        <!-- includeLocation="false" additivity="false"> -->
+        <!-- <AppenderRef ref="RollingFile" /> -->
+        <!-- <AppenderRef ref="Console" /> -->
+        <!-- <AppenderRef ref="ERROR" /> -->
+        <!-- <AppenderRef ref="TMP" /> -->
+        <!-- </AsyncLogger> -->
+        <!-- <AsyncLogger name="org.hibernate.SQL" level="trace" -->
+        <!-- includeLocation="false" additivity="false"> -->
+        <!-- <AppenderRef ref="Console" /> -->
+        <!-- </AsyncLogger> -->
+        <!-- <AsyncLogger name="org.hibernate.type" level="trace" -->
+        <!-- includeLocation="false" additivity="false"> -->
+        <!-- <AppenderRef ref="Console" /> -->
+        <!-- </AsyncLogger> -->
+    </Loggers>
+
+</Configuration>

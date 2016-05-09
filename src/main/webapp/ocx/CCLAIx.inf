@@ -1,0 +1,11 @@
+[version]
+   signature="$CHINA$"
+   AdvancedINF=2.0
+[Add.Code]
+   CCLAIx.ocx=CCLAIx.ocx
+[CCLAIx.ocx]
+   file-win32-x86=thiscab
+   clsid={2FA7FC61-8B41-44CF-AAF4-D1F2E7DC2BC4}  
+   fileVersion=1,0,0,1
+   RegisterServer=yes
+;
